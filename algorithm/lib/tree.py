@@ -1,8 +1,13 @@
+import queue
+
+
+
 class TreeNode():
-    def __init__(self, val:int=0, left:int=None, right:int=None):
+    def __init__(self, val:int=0, left:int=None, right:int=None, next:int=None):
         self.val = val
         self.left = left
         self.right = right
+        self.next = next
 
 
 class BinarySearchTree():
@@ -10,7 +15,7 @@ class BinarySearchTree():
         self.root = root
 
     # Preorder traversal
-    def preorder_traversal(self) -> list:
+    def preorder_traversal(self) -> list[int]:
         ans_list = []
         self.__preorder_traversal(self.root, ans_list)
         return ans_list
@@ -24,7 +29,7 @@ class BinarySearchTree():
             self.__preorder_traversal(root.right, ans_list)
 
     # inorder traversal
-    def inorder_traversal(self) -> list:
+    def inorder_traversal(self) -> list[int]:
         ans_list = []
         self.__inorder_traversal(self.root, ans_list)
         return ans_list
@@ -37,7 +42,7 @@ class BinarySearchTree():
             self.__inorder_traversal(root.right, ans_list)
 
     # postorder traversal
-    def postorder_traversal(self) -> list:
+    def postorder_traversal(self) -> list[int]:
         ans_list = []
         self.__postorder_traversal(self.root, ans_list)
         return ans_list
@@ -48,6 +53,22 @@ class BinarySearchTree():
         if root.right:
             self.__postorder_traversal(root.right, ans_list)
         ans_list.append(root.val)
+    
+    # breath first search
+    def bfs_traversal(self) -> list[int]:
+        ans = []
+        q = queue.Queue()
+        print(self.root)
+        q.put(self.root)
+
+        while not q.empty():
+            node = q.get()
+            ans.append(node.val)
+            if node.left != None:
+                q.put(node.left)
+            if node.right != None:
+                q.put(node.right)
+        return ans
 
     # tree building
     def build_tree(self, list1:list[int], list2:list[int], type:str) -> None:

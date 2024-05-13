@@ -5,6 +5,6 @@ from lib.BST_example import *
 bst = BinarySearchTree(BST_2)
 
 
-ans = bst.inorder_traversal()
+ans = bst.bfs_traversal()
 print(ans)
 

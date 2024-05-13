@@ -2,6 +2,10 @@
 # 不使用任何library、min()、max()等語法，只能用if判斷大小
 # swap時不使用data[i], data[j] = data[j], data[i]
 # 為了程式碼的易讀性，只有在decrease中統計迴圈次數、資料交換次數與if次數
+import random
+
+def rand_list(start, end, length):
+    return random.sample(range(start, end+1), length)
 
 class ArraySorting():
     def __init__(self) -> None:
@@ -20,6 +24,7 @@ class ArraySorting():
         print('Looping times:{}'.format(self.loop_times))
         print('If times:{}'.format(self.if_times))
 
+    # BUBBLE SORT
     def bubble_sort(self, data:list[int], type:str='+') -> None:
         # brute and force method
         # Time complexity:BC=O(n)、WC=O(n^2)、AC=O(n^2)
@@ -58,6 +63,7 @@ class ArraySorting():
         else:
             raise TypeError('Incorrect type input:{}'.format(type))
     
+    # SELECTION SORT
     def selection_sort(self, data:list[int], type:str='+') -> None:
         # kind of two pointers
         # Time complexity:BC=O(n)、WC=O(n^2)、AC=O(n^2)
@@ -86,6 +92,7 @@ class ArraySorting():
         else:
             raise TypeError('Incorrect type input:{}'.format(type))
     
+    # INSERTION SORT
     def insertion_sort(self, data:list[int], type:str='+') -> None:
         # kind of two pointers
         # Time complexity:BC=O(n)、WC=O(n^2)、AC=O(n^2)
@@ -126,10 +133,11 @@ class ArraySorting():
         else:
             raise TypeError('Incorrect type input:{}'.format(type))
     
+    # MERGE SORT
     def merge_sort(self, data:list[int], type:str='+') -> None:
         # divide and conquer、recursive
         # Time complexity:BC=O(n)、WC=O(n^2)、AC=O(n^2)
-        # Space complexity:O(1)
+        # Space complexity:O(1), in this code:O(n)
         self.__reset()
 
         if type == '+':
@@ -197,3 +205,44 @@ class ArraySorting():
                     self.loop_times += 1
                     ans.append(data2[a])
         return ans
+
+    # QUICK SORT
+    def quick_sort(self, data:list[int], type:int='+', l=None, r=None, p=None) -> None:
+        print(l, r, p)
+        # First recursive
+        if l == None:
+            l = 0
+            r = len(data)-2
+            p = len(data)-1
+            
+        init_l = l
+        init_r = p
+        # if list length is 0 or 1, directly return
+        if (p-l) < 1:
+            return
+        elif (p-l) == 2:
+            if data[l] > data[p]:
+                temp = data[l]
+                data[l] = data[p]
+                data[p] = temp
+
+        while l < r:
+            while (data[l] < data[p]) and (l <= r):
+                l += 1
+            while (data[p] < data[r]) and (l <= r):
+                r -= 1
+            if l <= r:
+                temp = data[l]
+                data[l] = data[r]
+                data[r] = temp
+
+        if data[l] > data[p]:
+            temp = data[l]
+            data[l] = data[p]
+            data[p] = temp
+
+        self.quick_sort(data, '+', init_l, l-2, l-1)
+        self.quick_sort(data, '+', l+1, init_r-1, init_r)
+
+        
+
