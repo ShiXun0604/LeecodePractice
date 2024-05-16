@@ -1,25 +1,22 @@
 class Solution:
     def __init__(self) -> None:
         self.ans = []
-    def helper(self, left, right, result) -> None:
+    def __helper(self, left, right, result) -> None:
         if left == 0:
             self.ans.append(result + (")"*right))
             return
-        if right == 0:
-            self.ans.append(result)
-            return
         
-        self.helper(left-1, right, result+"(")
+        self.__helper(left-1, right, result+"(")
         if left < right:
-            self.helper(left, right-1, result+")")
+            self.__helper(left, right-1, result+")")
 
     def generateParenthesis(self, n: int) -> list[str]:
-        self.helper(n,n, "")
+        self.__helper(n,n, "")
         return self.ans
 
 
 
 
 
-ans = Solution().generateParenthesis(9)
+ans = Solution().generateParenthesis(2)
 print(ans)
