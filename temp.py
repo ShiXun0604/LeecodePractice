@@ -1,46 +1,47 @@
-class ListNode:
-    def __init__(self, val=0, next=None):
+class TreeNode():
+    def __init__(self, val=0, left=None, right=None, next=None):
         self.val = val
-        self.next = next
+        self.left = left
+        self.right = right
 
-class Solution:
-    def mergeTwoLists(self, list1, list2):
-        # edge case
-        if list1 == None:
-            return list2
-        if list2 == None:
-            return list1
-        
-        if list1.val < list2.val:
-            head = ListNode(list1.val)
-            list1 = list1.next
+
+class Solution():
+    def __init__(self) -> None:
+        # (start, end) -> [Tree_1, ..., Tree_n]
+        self.hash_table = {
+
+        }
+
+    def __generateTrees(self, start, end) -> list[TreeNode]:
+        if (start, end) in self.hash_table.keys():
+            return self.hash_table[(start, end)]
+        elif start > end:
+            return [None]
         else:
-            head = ListNode(list2.val)
-            list2 = list2.next
+            ans = []
+            for i in range(start, end+1):
+                
+                # start ~ i-1
+                L_subtrees = self.__generateTrees(start, i-1)
+                # i+1 ~ end
+                R_subtrees = self.__generateTrees(i+1, end)
+
+                # Combine tree
+                for l in L_subtrees:
+                    for r in R_subtrees:
+                        ans.append(TreeNode(i, l, r))
+
+            self.hash_table[(start, end)] = ans
+            return ans
         
-        node = head
-        while list1 and list2:
-            if list1.val < list2.val:
-                node.next = ListNode(list1.val)
-                list1 = list1.next
-            else:
-                node.next = ListNode(list2.val)
-                list2 = list2.next
-            node = node.next
-        
-        if list1:
-            node.next = list1
-        else:
-            node.next = list2
-            
-        return head
+    def generateTrees(self, n: int) -> list[TreeNode]:
+        for i in range(1, n+1):
+            self.hash_table[(i ,i)] = [TreeNode(i)]
+
+        ans = self.__generateTrees(1, n)
+        return ans
 
 
-list1 = ListNode(1, ListNode(2, ListNode(4)))
-list2 = ListNode(1, ListNode(3, ListNode(4)))
-ans = Solution().mergeTwoLists(list1, list2)
+
+ans = Solution().generateTrees(5)
 print(ans)
-
-while ans:
-    print(ans.val)
-    ans = ans.next

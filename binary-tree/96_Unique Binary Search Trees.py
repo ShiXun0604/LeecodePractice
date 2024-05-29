@@ -13,7 +13,7 @@ class Solution:
         for i in range(1,n+1):
             a = self.numTrees(i-1)
             b = self.numTrees(n-i)
-            ans += a*b
+            ans += a * b
         self.hash_table[n] = ans
         return ans
 

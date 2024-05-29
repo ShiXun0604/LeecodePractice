@@ -1,23 +1,16 @@
-from lib.binary_search_tree import TreeNode
+class TreeNode():
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 
 
 class Solution:
-    def sortedArrayToBST(self, nums: list[int]) -> TreeNode:
-        if not nums:
-            return None
-        elif len(nums) == 1:
-            return TreeNode(nums[0])
-        else:
-            mid_index = int(len(nums)/2)
-            l_nums = nums[0:mid_index]
-            r_nums = nums[mid_index+1:len(nums)+1]
-            return TreeNode(nums[mid_index],
-                            left=self.sortedArrayToBST(l_nums),
-                            right=self.sortedArrayToBST(r_nums)
-                            )
+    def generateTrees(self, n: int) -> list[TreeNode]:
+        self.__generateTrees(1, n)
 
 
-nums = [-10,-3]
-solution = Solution()
-ans = solution.sortedArrayToBST(nums)
+
+ans = Solution().generateTrees(1)
+print(len(ans))

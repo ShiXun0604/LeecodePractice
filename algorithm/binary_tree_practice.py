@@ -2,9 +2,9 @@ from lib.tree import *
 from lib.BST_example import *
 
 
-bst = BinarySearchTree(BST_2)
+#bst = BinarySearchTree(BST_2)
 
+nums = [4, 2 ,3]
+heap = MaxHeap(nums)
 
-ans = bst.bfs_traversal()
-print(ans)
-
+print(heap.arr)

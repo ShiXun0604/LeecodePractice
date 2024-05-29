@@ -92,3 +92,32 @@ class BinarySearchTree():
         BST.left = self.__build_tree_PreIn(preorder_L, inorder_L)
         BST.right = self.__build_tree_PreIn(preorder_R, inorder_R)
         return BST
+
+# priority queue
+class MaxHeap():
+    def __init__(self, nums=[]) -> None:
+        self.arr = nums
+    
+    def insert(self, num) -> None:
+        if self.root == None:
+            self.root = TreeNode(num)
+    
+    def adjust(self, nums) -> None:
+        for num in nums:
+            pass
+    
+    def __parent(self, i) -> int:
+        if i == 0:
+            return 0
+        else:
+            return int((i+1)/2)
+    
+    def __left_child(self, i) -> int:
+        return 2*i - 1
+    
+    def __right_child(self, i) -> int:
+        return 2*i
+
+
+        
+         
