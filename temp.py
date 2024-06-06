@@ -7,41 +7,23 @@ class TreeNode():
 
 class Solution():
     def __init__(self) -> None:
-        # (start, end) -> [Tree_1, ..., Tree_n]
-        self.hash_table = {
-
-        }
-
-    def __generateTrees(self, start, end) -> list[TreeNode]:
-        if (start, end) in self.hash_table.keys():
-            return self.hash_table[(start, end)]
-        elif start > end:
-            return [None]
-        else:
-            ans = []
-            for i in range(start, end+1):
-                
-                # start ~ i-1
-                L_subtrees = self.__generateTrees(start, i-1)
-                # i+1 ~ end
-                R_subtrees = self.__generateTrees(i+1, end)
-
-                # Combine tree
-                for l in L_subtrees:
-                    for r in R_subtrees:
-                        ans.append(TreeNode(i, l, r))
-
-            self.hash_table[(start, end)] = ans
-            return ans
+        self.ans = []
+    
+    def __recur_gen(self, result, left, right) -> None:
+        pass
+        if left == 0:
+            self.ans.append(result + ")"*right)
+            return
         
-    def generateTrees(self, n: int) -> list[TreeNode]:
-        for i in range(1, n+1):
-            self.hash_table[(i ,i)] = [TreeNode(i)]
+        self.__recur_gen(result+'(', left-1, right)
+        if left < right:
+            self.__recur_gen(result+')', left, right-1)
+        
+    
+    def generateParenthesis(self, n: int) -> list[str]:
+        self.__recur_gen('', n, n)
+        return self.ans
 
-        ans = self.__generateTrees(1, n)
-        return ans
 
-
-
-ans = Solution().generateTrees(5)
-print(ans)
+s = 'abab'
+print(s[0:3])
