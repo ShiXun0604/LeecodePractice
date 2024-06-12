@@ -14,7 +14,6 @@ class Solution:
             if num == ans[index_5]*5:
                 index_5 += 1
         
-        print(ans)
         return ans[n-1]
             
 
